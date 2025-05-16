@@ -42,10 +42,10 @@ services:
       - TZ=Asia/Shanghai
       - wiredTigerCacheSizeGB=1
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=openIM123
+      - MONGO_INITDB_ROOT_PASSWORD=mianju@20250101
       - MONGO_INITDB_DATABASE=openim_v3
       - MONGO_OPENIM_USERNAME=openIM
-      - MONGO_OPENIM_PASSWORD=openIM123
+      - MONGO_OPENIM_PASSWORD=mianju@2025
     restart: always
     networks:
       - openim
@@ -148,7 +148,7 @@ services:
       - "11002:80"
     networks:
       - openim
-      
+
   prometheus:
     image: ${PROMETHEUS_IMAGE}
     container_name: prometheus
@@ -161,9 +161,9 @@ services:
       - ./config/instance-down-rules.yml:/etc/prometheus/instance-down-rules.yml
       - ${DATA_DIR}/components/prometheus/data:/prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.listen-address=:${PROMETHEUS_PORT}'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.listen-address=:${PROMETHEUS_PORT}"
     network_mode: host
 
   alertmanager:
@@ -176,8 +176,8 @@ services:
       - ./config/alertmanager.yml:/etc/alertmanager/alertmanager.yml
       - ./config/email.tmpl:/etc/alertmanager/email.tmpl
     command:
-      - '--config.file=/etc/alertmanager/alertmanager.yml'
-      - '--web.listen-address=:${ALERTMANAGER_PORT}'
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+      - "--web.listen-address=:${ALERTMANAGER_PORT}"
     network_mode: host
 
   grafana:
@@ -209,9 +209,8 @@ services:
       - /sys:/host/sys:ro
       - /:/rootfs:ro
     command:
-      - '--path.procfs=/host/proc'
-      - '--path.sysfs=/host/sys'
-      - '--path.rootfs=/rootfs'
-      - '--web.listen-address=:19100'
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--path.rootfs=/rootfs"
+      - "--web.listen-address=:19100"
     network_mode: host
-
