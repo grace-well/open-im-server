@@ -42,10 +42,10 @@ services:
       - TZ=Asia/Shanghai
       - wiredTigerCacheSizeGB=1
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=mianju@20250101
+      - MONGO_INITDB_ROOT_PASSWORD=mianju20250101
       - MONGO_INITDB_DATABASE=openim_v3
       - MONGO_OPENIM_USERNAME=openIM
-      - MONGO_OPENIM_PASSWORD=mianju@2025
+      - MONGO_OPENIM_PASSWORD=mianju2025
     restart: always
     networks:
       - openim
@@ -125,7 +125,7 @@ services:
     environment:
       TZ: Asia/Shanghai
       MINIO_ROOT_USER: root
-      MINIO_ROOT_PASSWORD: mianju@2025
+      MINIO_ROOT_PASSWORD: mianju2025
     restart: always
     command: minio server /data --console-address ':9090'
     networks:

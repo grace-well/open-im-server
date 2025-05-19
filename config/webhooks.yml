@@ -1,4 +1,5 @@
-url: http://127.0.0.1:10006/callbackExample
+# url: http://127.0.0.1:10006/callbackExample
+url: http://192.168.113.102:9000/openim/imcallback
 beforeSendSingleMsg:
   enable: false
   timeout: 5
@@ -51,7 +52,7 @@ afterUserKickOff:
   enable: false
   timeout: 5
 beforeOfflinePush:
-  enable: false
+  enable: true
   timeout: 5
   failedContinue: true
 beforeOnlinePush:
