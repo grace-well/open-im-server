@@ -1,4 +1,4 @@
-url: http://127.0.0.1:10006/callbackExample
+url: http://127.0.0.1:9000/openim/imcallback
 beforeSendSingleMsg:
   enable: false
   timeout: 5
@@ -14,11 +14,11 @@ beforeSendSingleMsg:
   # If not set, all contentType messages will through this filter.
   deniedTypes: []
 beforeUpdateUserInfoEx:
-  enable:  false
+  enable: false
   timeout: 5
   failedContinue: true
 afterUpdateUserInfoEx:
-  enable:  false
+  enable: false
   timeout: 5
 afterSendSingleMsg:
   enable: false
@@ -50,16 +50,16 @@ afterSendGroupMsg:
   allowedTypes: []
   deniedTypes: []
 afterUserOnline:
-  enable: false
+  enable: true
   timeout: 5
 afterUserOffline:
-  enable: false
+  enable: true
   timeout: 5
 afterUserKickOff:
   enable: false
   timeout: 5
 beforeOfflinePush:
-  enable: false
+  enable: true
   timeout: 5
   failedContinue: true
 beforeOnlinePush:

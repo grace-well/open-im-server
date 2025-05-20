@@ -42,10 +42,10 @@ services:
       - TZ=Asia/Shanghai
       - wiredTigerCacheSizeGB=1
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=openIM123
+      - MONGO_INITDB_ROOT_PASSWORD=Mianju20250515
       - MONGO_INITDB_DATABASE=openim_v3
       - MONGO_OPENIM_USERNAME=openIM
-      - MONGO_OPENIM_PASSWORD=openIM123
+      - MONGO_OPENIM_PASSWORD=Mianju20250515
     restart: always
     networks:
       - openim
@@ -63,7 +63,7 @@ services:
     restart: always
     sysctls:
       net.core.somaxconn: 1024
-    command: redis-server /usr/local/redis/config/redis.conf --requirepass openIM123 --appendonly yes
+    command: redis-server /usr/local/redis/config/redis.conf --requirepass Mianju20250515 --appendonly yes
     networks:
       - openim
 
@@ -123,7 +123,7 @@ services:
     environment:
       TZ: Asia/Shanghai
       MINIO_ROOT_USER: root
-      MINIO_ROOT_PASSWORD: openIM123
+      MINIO_ROOT_PASSWORD: Mianju20250515
     restart: always
     command: minio server /data --console-address ':9090'
     networks:

@@ -1,43 +1,44 @@
 # OpenIM ENVIRONMENT CONFIGURATION
 
 <!-- vscode-markdown-toc -->
-* 1. [OpenIM Deployment Guide](#OpenIMDeploymentGuide)
-	* 1.1. [Deployment Strategies](#DeploymentStrategies)
-	* 1.2. [Source Code Deployment](#SourceCodeDeployment)
-	* 1.3. [Docker Compose Deployment](#DockerComposeDeployment)
-	* 1.4. [Environment Variable Configuration](#EnvironmentVariableConfiguration)
-		* 1.4.1. [Recommended using environment variables](#Recommendedusingenvironmentvariables)
-		* 1.4.2. [Additional Configuration](#AdditionalConfiguration)
-		* 1.4.3. [Security Considerations](#SecurityConsiderations)
-		* 1.4.4. [Data Management](#DataManagement)
-		* 1.4.5. [Monitoring and Logging](#MonitoringandLogging)
-		* 1.4.6. [Troubleshooting](#Troubleshooting)
-		* 1.4.7. [Conclusion](#Conclusion)
-		* 1.4.8. [Additional Resources](#AdditionalResources)
-* 2. [Further Configuration](#FurtherConfiguration)
-	* 2.1. [Image Registry Configuration](#ImageRegistryConfiguration)
-	* 2.2. [OpenIM Docker Network Configuration](#OpenIMDockerNetworkConfiguration)
-	* 2.3. [OpenIM Configuration](#OpenIMConfiguration)
-	* 2.4. [OpenIM Chat Configuration](#OpenIMChatConfiguration)
-	* 2.5. [Zookeeper Configuration](#ZookeeperConfiguration)
-	* 2.6. [MySQL Configuration](#MySQLConfiguration)
-	* 2.7. [MongoDB Configuration](#MongoDBConfiguration)
-	* 2.8. [Tencent Cloud COS Configuration](#TencentCloudCOSConfiguration)
-	* 2.9. [Alibaba Cloud OSS Configuration](#AlibabaCloudOSSConfiguration)
-	* 2.10. [Redis Configuration](#RedisConfiguration)
-	* 2.11. [Kafka Configuration](#KafkaConfiguration)
-	* 2.12. [OpenIM Web Configuration](#OpenIMWebConfiguration)
-	* 2.13. [RPC Configuration](#RPCConfiguration)
-	* 2.14. [Prometheus Configuration](#PrometheusConfiguration)
-	* 2.15. [Grafana Configuration](#GrafanaConfiguration)
-	* 2.16. [RPC Port Configuration Variables](#RPCPortConfigurationVariables)
-	* 2.17. [RPC Register Name Configuration](#RPCRegisterNameConfiguration)
-	* 2.18. [Log Configuration](#LogConfiguration)
-	* 2.19. [Additional Configuration Variables](#AdditionalConfigurationVariables)
-	* 2.20. [Prometheus Configuration](#PrometheusConfiguration-1)
-		* 2.20.1. [General Configuration](#GeneralConfiguration)
-		* 2.20.2. [Service-Specific Prometheus Ports](#Service-SpecificPrometheusPorts)
-	* 2.21. [Qiniu Cloud Kodo Configuration](#QiniuCloudKODOConfiguration)
+
+- 1. [OpenIM Deployment Guide](#OpenIMDeploymentGuide)
+  - 1.1. [Deployment Strategies](#DeploymentStrategies)
+  - 1.2. [Source Code Deployment](#SourceCodeDeployment)
+  - 1.3. [Docker Compose Deployment](#DockerComposeDeployment)
+  - 1.4. [Environment Variable Configuration](#EnvironmentVariableConfiguration)
+    - 1.4.1. [Recommended using environment variables](#Recommendedusingenvironmentvariables)
+    - 1.4.2. [Additional Configuration](#AdditionalConfiguration)
+    - 1.4.3. [Security Considerations](#SecurityConsiderations)
+    - 1.4.4. [Data Management](#DataManagement)
+    - 1.4.5. [Monitoring and Logging](#MonitoringandLogging)
+    - 1.4.6. [Troubleshooting](#Troubleshooting)
+    - 1.4.7. [Conclusion](#Conclusion)
+    - 1.4.8. [Additional Resources](#AdditionalResources)
+- 2. [Further Configuration](#FurtherConfiguration)
+  - 2.1. [Image Registry Configuration](#ImageRegistryConfiguration)
+  - 2.2. [OpenIM Docker Network Configuration](#OpenIMDockerNetworkConfiguration)
+  - 2.3. [OpenIM Configuration](#OpenIMConfiguration)
+  - 2.4. [OpenIM Chat Configuration](#OpenIMChatConfiguration)
+  - 2.5. [Zookeeper Configuration](#ZookeeperConfiguration)
+  - 2.6. [MySQL Configuration](#MySQLConfiguration)
+  - 2.7. [MongoDB Configuration](#MongoDBConfiguration)
+  - 2.8. [Tencent Cloud COS Configuration](#TencentCloudCOSConfiguration)
+  - 2.9. [Alibaba Cloud OSS Configuration](#AlibabaCloudOSSConfiguration)
+  - 2.10. [Redis Configuration](#RedisConfiguration)
+  - 2.11. [Kafka Configuration](#KafkaConfiguration)
+  - 2.12. [OpenIM Web Configuration](#OpenIMWebConfiguration)
+  - 2.13. [RPC Configuration](#RPCConfiguration)
+  - 2.14. [Prometheus Configuration](#PrometheusConfiguration)
+  - 2.15. [Grafana Configuration](#GrafanaConfiguration)
+  - 2.16. [RPC Port Configuration Variables](#RPCPortConfigurationVariables)
+  - 2.17. [RPC Register Name Configuration](#RPCRegisterNameConfiguration)
+  - 2.18. [Log Configuration](#LogConfiguration)
+  - 2.19. [Additional Configuration Variables](#AdditionalConfigurationVariables)
+  - 2.20. [Prometheus Configuration](#PrometheusConfiguration-1)
+    - 2.20.1. [General Configuration](#GeneralConfiguration)
+    - 2.20.2. [Service-Specific Prometheus Ports](#Service-SpecificPrometheusPorts)
+  - 2.21. [Qiniu Cloud Kodo Configuration](#QiniuCloudKODOConfiguration)
 
 ## 0. <a name='TableofContents'></a>OpenIM Config File
 
@@ -45,13 +46,13 @@ Ensuring that OpenIM operates smoothly requires clear direction on the configura
 
 1. **Using the Command-line Argument**:
 
-   + **For Configuration Path**: When initializing OpenIM, you can specify the path to the configuration file directly using the `-c` or `--config_folder_path` option.
+   - **For Configuration Path**: When initializing OpenIM, you can specify the path to the configuration file directly using the `-c` or `--config_folder_path` option.
 
      ```bash
      ❯ _output/bin/platforms/linux/amd64/openim-api --config_folder_path="/your/config/folder/path"
      ```
 
-   + **For Port Specification**: Similarly, if you wish to designate a particular port, utilize the `-p` option followed by the desired port number.
+   - **For Port Specification**: Similarly, if you wish to designate a particular port, utilize the `-p` option followed by the desired port number.
 
      ```bash
      ❯ _output/bin/platforms/linux/amd64/openim-api -p 1234
@@ -71,13 +72,11 @@ Ensuring that OpenIM operates smoothly requires clear direction on the configura
 
    In scenarios where neither command-line arguments nor environment variables are provided, OpenIM will intuitively revert to the `config/` directory to locate its configuration.
 
-
-
-##  1. <a name='OpenIMDeploymentGuide'></a>OpenIM Deployment Guide
+## 1. <a name='OpenIMDeploymentGuide'></a>OpenIM Deployment Guide
 
 Welcome to the OpenIM Deployment Guide! OpenIM offers a versatile and robust instant messaging server, and deploying it can be achieved through various methods. This guide will walk you through the primary deployment strategies, ensuring you can set up OpenIM in a way that best suits your needs.
 
-###  1.1. <a name='DeploymentStrategies'></a>Deployment Strategies
+### 1.1. <a name='DeploymentStrategies'></a>Deployment Strategies
 
 OpenIM provides multiple deployment methods, each tailored to different use cases and technical preferences:
 
@@ -87,17 +86,17 @@ OpenIM provides multiple deployment methods, each tailored to different use case
 
 While the first two methods will be our main focus, it's worth noting that the third method, Kubernetes deployment, is also viable and can be rendered via the `environment.sh` script variables.
 
-###  1.2. <a name='SourceCodeDeployment'></a>Source Code Deployment
+### 1.2. <a name='SourceCodeDeployment'></a>Source Code Deployment
 
 In the source code deployment method, the configuration generation process involves executing `make init`, which fundamentally runs the script `./scripts/init-config.sh`. This script utilizes variables defined in the [`environment.sh`](https://github.com/openimsdk/open-im-server/blob/main/scripts/install/environment.sh) script to render the [`config.yaml`](https://github.com/openimsdk/open-im-server/blob/main/deployments/templates/config.yaml) template file, subsequently generating the [`config.yaml`](https://github.com/openimsdk/open-im-server/blob/main/config/config.yaml) configuration file.
 
-###  1.3. <a name='DockerComposeDeployment'></a>Docker Compose Deployment
+### 1.3. <a name='DockerComposeDeployment'></a>Docker Compose Deployment
 
 Docker deployment offers a slightly more intricate template. Within the [openim-server](https://github.com/openimsdk/openim-docker/tree/main/openim-server) directory, multiple subdirectories correspond to various versions, each aligning with `openim-chat` as illustrated below:
 
-| openim-server                                                | openim-chat                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [main](https://github.com/openimsdk/openim-docker/tree/main/openim-server/main) | [main](https://github.com/openimsdk/openim-docker/tree/main/openim-chat/main) |
+| openim-server                                                                                   | openim-chat                                                                                   |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [main](https://github.com/openimsdk/openim-docker/tree/main/openim-server/main)                 | [main](https://github.com/openimsdk/openim-docker/tree/main/openim-chat/main)                 |
 | [release-v3.2](https://github.com/openimsdk/openim-docker/tree/main/openim-server/release-v3.3) | [release-v3.2](https://github.com/openimsdk/openim-docker/tree/main/openim-chat/release-v1.3) |
 | [release-v3.2](https://github.com/openimsdk/openim-docker/tree/main/openim-server/release-v3.2) | [release-v3.2](https://github.com/openimsdk/openim-docker/tree/main/openim-chat/release-v1.2) |
 
@@ -114,36 +113,36 @@ These variables are stored within the [`environment.sh`](https://github.com/Open
 readonly CHAT_IMAGE_VERSION=${CHAT_IMAGE_VERSION:-'main'}
 readonly SERVER_IMAGE_VERSION=${SERVER_IMAGE_VERSION:-'main'}
 ```
+
 > [!IMPORTANT]
 > Can learn to read our mirror version strategy: https://github.com/openimsdk/open-im-server/blob/main/docs/contrib/images.md
-
 
 Setting a variable, e.g., `export CHAT_IMAGE_VERSION="release-v1.3"`, will prioritize `CHAT_IMAGE_VERSION="release-v1.3"` as the variable value. Ultimately, the chosen image version is determined, and rendering is achieved through `make init` (or `./scripts/init-config.sh`).
 
 > Note: Direct modifications to the `config.yaml` file are also permissible without utilizing `make init`.
 
-###  1.4. <a name='EnvironmentVariableConfiguration'></a>Environment Variable Configuration
+### 1.4. <a name='EnvironmentVariableConfiguration'></a>Environment Variable Configuration
 
 For convenience, configuration through modifying environment variables is recommended:
 
-####  1.4.1. <a name='Recommendedusingenvironmentvariables'></a>Recommended using environment variables
+#### 1.4.1. <a name='Recommendedusingenvironmentvariables'></a>Recommended using environment variables
 
-+ PASSWORD
+- PASSWORD
 
-  + **Description**: Password for mongodb, redis, and minio.
-  + **Default**: `openIM123`
-  + Notes:
-    + Minimum password length: 8 characters.
-    + Special characters are not allowed.
+  - **Description**: Password for mongodb, redis, and minio.
+  - **Default**: `Mianju20250515`
+  - Notes:
+    - Minimum password length: 8 characters.
+    - Special characters are not allowed.
 
   ```bash
-  export PASSWORD="openIM123"
+  export PASSWORD="Mianju20250515"
   ```
 
-+ OPENIM_USER
+- OPENIM_USER
 
-  + **Description**: Username for redis, and minio.
-  + **Default**: `root`
+  - **Description**: Username for redis, and minio.
+  - **Default**: `root`
 
   ```bash
   export OPENIM_USER="root"
@@ -151,25 +150,25 @@ For convenience, configuration through modifying environment variables is recomm
 
 > mongo is `openIM`, use `export MONGO_OPENIM_USERNAME="openIM"` to modify
 
-+ OPENIM_IP
+- OPENIM_IP
 
-  + **Description**: API address.
-  + **Note**: If the server has an external IP, it will be automatically obtained. For internal networks, set this variable to the IP serving internally.
+  - **Description**: API address.
+  - **Note**: If the server has an external IP, it will be automatically obtained. For internal networks, set this variable to the IP serving internally.
 
   ```bash
   export OPENIM_IP="ip"
   ```
 
-+ DATA_DIR
+- DATA_DIR
 
-  + **Description**: Data mount directory for components.
-  + **Default**: `/data/openim`
+  - **Description**: Data mount directory for components.
+  - **Default**: `/data/openim`
 
   ```bash
   export DATA_DIR="/data/openim"
   ```
 
-####  1.4.2. <a name='AdditionalConfiguration'></a>Additional Configuration
+#### 1.4.2. <a name='AdditionalConfiguration'></a>Additional Configuration
 
 ##### MinIO Access and Secret Key
 
@@ -188,7 +187,7 @@ MinIO comes with an embedded web-based object browser. You can control the avail
 export MINIO_BROWSER="on"
 ```
 
-####  1.4.3. <a name='SecurityConsiderations'></a>Security Considerations
+#### 1.4.3. <a name='SecurityConsiderations'></a>Security Considerations
 
 ##### TLS/SSL Configuration
 
@@ -198,7 +197,7 @@ For secure communication, it's recommended to enable TLS/SSL for your MinIO serv
 export MINIO_CERTS_DIR="/path/to/certs/directory"
 ```
 
-####  1.4.4. <a name='DataManagement'></a>Data Management
+#### 1.4.4. <a name='DataManagement'></a>Data Management
 
 ##### Data Retention Policy
 
@@ -208,7 +207,7 @@ You may want to set up a data retention policy to automatically delete objects a
 export MINIO_RETENTION_DAYS="30"
 ```
 
-####  1.4.5. <a name='MonitoringandLogging'></a>Monitoring and Logging
+#### 1.4.5. <a name='MonitoringandLogging'></a>Monitoring and Logging
 
 ##### [Audit Logging](https://github.com/openimsdk/open-im-server/blob/main/docs/contrib/environment.md#audit-logging)
 
@@ -218,7 +217,7 @@ Enable audit logging to keep track of access and changes to your data.
 export MINIO_AUDIT="on"
 ```
 
-####  1.4.6. <a name='Troubleshooting'></a>Troubleshooting
+#### 1.4.6. <a name='Troubleshooting'></a>Troubleshooting
 
 ##### Debug Mode
 
@@ -228,41 +227,39 @@ In case of issues, you may enable debug mode to get more detailed logs to assist
 export MINIO_DEBUG="on"
 ```
 
-####  1.4.7. <a name='Conclusion'></a>Conclusion
+#### 1.4.7. <a name='Conclusion'></a>Conclusion
 
 With the environment variables configured as per your requirements, your MinIO server should be ready to securely store and manage your object data. Ensure to verify the setup and monitor the logs for any unusual activities or errors. Regularly update the MinIO server and review your configuration to adapt to any changes or improvements in the MinIO system.
 
-####  1.4.8. <a name='AdditionalResources'></a>Additional Resources
+#### 1.4.8. <a name='AdditionalResources'></a>Additional Resources
 
-+ [MinIO Client Quickstart Guide](https://docs.min.io/docs/minio-client-quickstart-guide)
-+ [MinIO Admin Complete Guide](https://docs.min.io/docs/minio-admin-complete-guide)
-+ [MinIO Docker Quickstart Guide](https://docs.min.io/docs/minio-docker-quickstart-guide)
+- [MinIO Client Quickstart Guide](https://docs.min.io/docs/minio-client-quickstart-guide)
+- [MinIO Admin Complete Guide](https://docs.min.io/docs/minio-admin-complete-guide)
+- [MinIO Docker Quickstart Guide](https://docs.min.io/docs/minio-docker-quickstart-guide)
 
 Feel free to explore the MinIO documentation for more advanced configurations and usage scenarios.
 
+## 2. <a name='FurtherConfiguration'></a>Further Configuration
 
-
-##  2. <a name='FurtherConfiguration'></a>Further Configuration
-
-###  2.1. <a name='ImageRegistryConfiguration'></a>Image Registry Configuration
+### 2.1. <a name='ImageRegistryConfiguration'></a>Image Registry Configuration
 
 **Description**: The image registry configuration allows users to select an image address for use. The default is set to use GITHUB images, but users can opt for Docker Hub or Ali Cloud, especially beneficial for Chinese users due to its local proximity.
 
-| Parameter        | Default Value         | Description                                                  |
-| ---------------- | --------------------- | ------------------------------------------------------------ |
+| Parameter        | Default Value         | Description                                                                                                                                 |
+| ---------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `IMAGE_REGISTRY` | `"ghcr.io/openimsdk"` | The registry from which Docker images will be pulled. Other options include `"openim"` and `"registry.cn-hangzhou.aliyuncs.com/openimsdk"`. |
 
-###  2.2. <a name='OpenIMDockerNetworkConfiguration'></a>OpenIM Docker Network Configuration
+### 2.2. <a name='OpenIMDockerNetworkConfiguration'></a>OpenIM Docker Network Configuration
 
 **Description**: This section configures the Docker network subnet and generates IP addresses for various services within the defined subnet.
 
-| Parameter                   | Example Value     | Description                                                  |
-| --------------------------- | ----------------- | ------------------------------------------------------------ |
-| `DOCKER_BRIDGE_SUBNET`      | `'172.28.0.0/16'` | The subnet for the Docker network.                           |
-| `DOCKER_BRIDGE_GATEWAY`     | Generated IP      | The gateway IP address within the Docker subnet.             |
+| Parameter                   | Example Value     | Description                                                                                               |
+| --------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
+| `DOCKER_BRIDGE_SUBNET`      | `'172.28.0.0/16'` | The subnet for the Docker network.                                                                        |
+| `DOCKER_BRIDGE_GATEWAY`     | Generated IP      | The gateway IP address within the Docker subnet.                                                          |
 | `[SERVICE]_NETWORK_ADDRESS` | Generated IP      | The network IP address for a specific service (e.g., MYSQL, MONGO, REDIS, etc.) within the Docker subnet. |
 
-###  2.3. <a name='OpenIMConfiguration'></a>OpenIM Configuration
+### 2.3. <a name='OpenIMConfiguration'></a>OpenIM Configuration
 
 **Description**: OpenIM configuration involves setting up directories for data, installation, configuration, and logs. It also involves configuring the OpenIM server address and ports for WebSocket and API.
 
@@ -276,7 +273,7 @@ Feel free to explore the MinIO documentation for more advanced configurations an
 | `OPENIM_WS_PORT`        | `'10001'`                | Port for OpenIM WebSocket.                |
 | `API_OPENIM_PORT`       | `'10002'`                | Port for OpenIM API.                      |
 
-###  2.4. <a name='OpenIMChatConfiguration'></a>OpenIM Chat Configuration
+### 2.4. <a name='OpenIMChatConfiguration'></a>OpenIM Chat Configuration
 
 **Description**: Configuration for OpenIM chat, including data directory, server address, and ports for API and chat functionalities.
 
@@ -289,7 +286,7 @@ Feel free to explore the MinIO documentation for more advanced configurations an
 | `OPENIM_ADMIN_PORT`     | `"30200"`                  | Port for OpenIM chat Admin.     |
 | `OPENIM_CHAT_PORT`      | `"30300"`                  | Port for OpenIM chat.           |
 
-###  2.5. <a name='ZookeeperConfiguration'></a>Zookeeper Configuration
+### 2.5. <a name='ZookeeperConfiguration'></a>Zookeeper Configuration
 
 **Description**: Configuration for Zookeeper, including schema, port, address, and credentials.
 
@@ -301,47 +298,46 @@ Feel free to explore the MinIO documentation for more advanced configurations an
 | `ZOOKEEPER_USERNAME` | `""`                     | Username for Zookeeper. |
 | `ZOOKEEPER_PASSWORD` | `""`                     | Password for Zookeeper. |
 
-###  2.7. <a name='MongoDBConfiguration'></a>MongoDB Configuration
+### 2.7. <a name='MongoDBConfiguration'></a>MongoDB Configuration
 
 This section involves setting up MongoDB, including its port, address, and credentials.
 
+| Parameter             | Example Value  | Description                  |
+| --------------------- | -------------- | ---------------------------- |
+| MONGO_PORT            | "27017"        | Port used by MongoDB.        |
+| MONGO_ADDRESS         | [Generated IP] | IP address for MongoDB.      |
+| MONGO_USERNAME        | [User Defined] | Admin Username for MongoDB.  |
+| MONGO_PASSWORD        | [User Defined] | Admin Password for MongoDB.  |
+| MONGO_OPENIM_USERNAME | [User Defined] | OpenIM Username for MongoDB. |
+| MONGO_OPENIM_PASSWORD | [User Defined] | OpenIM Password for MongoDB. |
 
-| Parameter      | Example Value  | Description             |
-| -------------- | -------------- | ----------------------- |
-| MONGO_PORT     | "27017"        | Port used by MongoDB.   |
-| MONGO_ADDRESS  | [Generated IP] | IP address for MongoDB. |
-| MONGO_USERNAME | [User Defined] | Admin Username for MongoDB.   |
-| MONGO_PASSWORD | [User Defined] | Admin Password for MongoDB.   |
-| MONGO_OPENIM_USERNAME | [User Defined] | OpenIM Username for MongoDB.   |
-| MONGO_OPENIM_PASSWORD | [User Defined] | OpenIM Password for MongoDB.   |
-
-###  2.8. <a name='TencentCloudCOSConfiguration'></a>Tencent Cloud COS Configuration
+### 2.8. <a name='TencentCloudCOSConfiguration'></a>Tencent Cloud COS Configuration
 
 This section involves setting up Tencent Cloud COS, including its bucket URL and credentials.
 
-| Parameter         | Example Value                                                | Description                          |
-| ----------------- | ------------------------------------------------------------ | ------------------------------------ |
+| Parameter         | Example Value                                                                                                 | Description                          |
+| ----------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | COS_BUCKET_URL    | "[https://temp-1252357374.cos.ap-chengdu.myqcloud.com](https://temp-1252357374.cos.ap-chengdu.myqcloud.com/)" | Tencent Cloud COS bucket URL.        |
-| COS_SECRET_ID     | [User Defined]                                               | Secret ID for Tencent Cloud COS.     |
-| COS_SECRET_KEY    | [User Defined]                                               | Secret key for Tencent Cloud COS.    |
-| COS_SESSION_TOKEN | [User Defined]                                               | Session token for Tencent Cloud COS. |
-| COS_PUBLIC_READ   | "false"                                                      | Public read access.                  |
+| COS_SECRET_ID     | [User Defined]                                                                                                | Secret ID for Tencent Cloud COS.     |
+| COS_SECRET_KEY    | [User Defined]                                                                                                | Secret key for Tencent Cloud COS.    |
+| COS_SESSION_TOKEN | [User Defined]                                                                                                | Session token for Tencent Cloud COS. |
+| COS_PUBLIC_READ   | "false"                                                                                                       | Public read access.                  |
 
-###  2.9. <a name='AlibabaCloudOSSConfiguration'></a>Alibaba Cloud OSS Configuration
+### 2.9. <a name='AlibabaCloudOSSConfiguration'></a>Alibaba Cloud OSS Configuration
 
 This section involves setting up Alibaba Cloud OSS, including its endpoint, bucket name, and credentials.
 
-| Parameter             | Example Value                                                | Description                              |
-| --------------------- | ------------------------------------------------------------ | ---------------------------------------- |
-| OSS_ENDPOINT          | "[https://oss-cn-chengdu.aliyuncs.com](https://oss-cn-chengdu.aliyuncs.com/)" | Endpoint URL for Alibaba Cloud OSS.      |
-| OSS_BUCKET            | "demo-9999999"                                               | Bucket name for Alibaba Cloud OSS.       |
+| Parameter             | Example Value                                                                                           | Description                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| OSS_ENDPOINT          | "[https://oss-cn-chengdu.aliyuncs.com](https://oss-cn-chengdu.aliyuncs.com/)"                           | Endpoint URL for Alibaba Cloud OSS.      |
+| OSS_BUCKET            | "demo-9999999"                                                                                          | Bucket name for Alibaba Cloud OSS.       |
 | OSS_BUCKET_URL        | "[https://demo-9999999.oss-cn-chengdu.aliyuncs.com](https://demo-9999999.oss-cn-chengdu.aliyuncs.com/)" | Bucket URL for Alibaba Cloud OSS.        |
-| OSS_ACCESS_KEY_ID     | [User Defined]                                               | Access key ID for Alibaba Cloud OSS.     |
-| OSS_ACCESS_KEY_SECRET | [User Defined]                                               | Access key secret for Alibaba Cloud OSS. |
-| OSS_SESSION_TOKEN     | [User Defined]                                               | Session token for Alibaba Cloud OSS.     |
-| OSS_PUBLIC_READ       | "false"                                                      | Public read access.                      |
+| OSS_ACCESS_KEY_ID     | [User Defined]                                                                                          | Access key ID for Alibaba Cloud OSS.     |
+| OSS_ACCESS_KEY_SECRET | [User Defined]                                                                                          | Access key secret for Alibaba Cloud OSS. |
+| OSS_SESSION_TOKEN     | [User Defined]                                                                                          | Session token for Alibaba Cloud OSS.     |
+| OSS_PUBLIC_READ       | "false"                                                                                                 | Public read access.                      |
 
-###  2.10. <a name='RedisConfiguration'></a>Redis Configuration
+### 2.10. <a name='RedisConfiguration'></a>Redis Configuration
 
 This section involves setting up Redis, including its port, address, and credentials.
 
@@ -352,7 +348,7 @@ This section involves setting up Redis, including its port, address, and credent
 | REDIS_USERNAME | [User Defined]             | Username for Redis.   |
 | REDIS_PASSWORD | "${PASSWORD}"              | Password for Redis.   |
 
-###  2.11. <a name='KafkaConfiguration'></a>Kafka Configuration
+### 2.11. <a name='KafkaConfiguration'></a>Kafka Configuration
 
 This section involves setting up Kafka, including its port, address, credentials, and topics.
 
@@ -372,9 +368,7 @@ This section involves setting up Kafka, including its port, address, credentials
 
 Note: Ensure to replace placeholder values (like [User Defined], `${DOCKER_BRIDGE_GATEWAY}`, and `${PASSWORD}`) with actual values before deploying the configuration.
 
-
-
-###  2.12. <a name='OpenIMWebConfiguration'></a>OpenIM Web Configuration
+### 2.12. <a name='OpenIMWebConfiguration'></a>OpenIM Web Configuration
 
 This section involves setting up OpenIM Web, including its port, address, and dist path.
 
@@ -384,7 +378,7 @@ This section involves setting up OpenIM Web, including its port, address, and di
 | OPENIM_WEB_ADDRESS   | "${DOCKER_BRIDGE_GATEWAY}" | Address for OpenIM Web.   |
 | OPENIM_WEB_DIST_PATH | "/app/dist"                | Dist path for OpenIM Web. |
 
-###  2.13. <a name='RPCConfiguration'></a>RPC Configuration
+### 2.13. <a name='RPCConfiguration'></a>RPC Configuration
 
 Configuration for RPC, including the register and listen IP.
 
@@ -393,7 +387,7 @@ Configuration for RPC, including the register and listen IP.
 | RPC_REGISTER_IP | [User Defined] | Register IP for RPC. |
 | RPC_LISTEN_IP   | "0.0.0.0"      | Listen IP for RPC.   |
 
-###  2.14. <a name='PrometheusConfiguration'></a>Prometheus Configuration
+### 2.14. <a name='PrometheusConfiguration'></a>Prometheus Configuration
 
 Setting up Prometheus, including its port and address.
 
@@ -402,16 +396,16 @@ Setting up Prometheus, including its port and address.
 | PROMETHEUS_PORT    | "19090"                    | Port used by Prometheus. |
 | PROMETHEUS_ADDRESS | "${DOCKER_BRIDGE_GATEWAY}" | Address for Prometheus.  |
 
-###  2.15. <a name='GrafanaConfiguration'></a>Grafana Configuration
+### 2.15. <a name='GrafanaConfiguration'></a>Grafana Configuration
 
 Configuration for Grafana, including its port and address.
 
 | Parameter       | Example Value              | Description           |
 | --------------- | -------------------------- | --------------------- |
-| GRAFANA_PORT    | "13000"                     | Port used by Grafana. |
+| GRAFANA_PORT    | "13000"                    | Port used by Grafana. |
 | GRAFANA_ADDRESS | "${DOCKER_BRIDGE_GATEWAY}" | Address for Grafana.  |
 
-###  2.16. <a name='RPCPortConfigurationVariables'></a>RPC Port Configuration Variables
+### 2.16. <a name='RPCPortConfigurationVariables'></a>RPC Port Configuration Variables
 
 Configuration for various RPC ports. Note: For launching multiple programs, just fill in multiple ports separated by commas. Try not to have spaces.
 
@@ -427,7 +421,7 @@ Configuration for various RPC ports. Note: For launching multiple programs, just
 | OPENIM_CONVERSATION_PORT    | '10180'       | OpenIM Conversation Service Port.   |
 | OPENIM_THIRD_PORT           | '10190'       | OpenIM Third-Party Service Port.    |
 
-###  2.17. <a name='RPCRegisterNameConfiguration'></a>RPC Register Name Configuration
+### 2.17. <a name='RPCRegisterNameConfiguration'></a>RPC Register Name Configuration
 
 This section involves setting up the RPC Register Names for various OpenIM services.
 
@@ -443,69 +437,70 @@ This section involves setting up the RPC Register Names for various OpenIM servi
 | OPENIM_CONVERSATION_NAME    | "Conversation"   | OpenIM Conversation Service Name    |
 | OPENIM_THIRD_NAME           | "Third"          | OpenIM Third-Party Service Name     |
 
-###  2.18. <a name='LogConfiguration'></a>Log Configuration
+### 2.18. <a name='LogConfiguration'></a>Log Configuration
 
 This section involves configuring the log settings, including storage location, rotation time, and log level.
 
-| Parameter                 | Example Value            | Description                       |
-| ------------------------- | ------------------------ | --------------------------------- |
-| LOG_STORAGE_LOCATION      | "${OPENIM_ROOT}/_output/logs/" | Location for storing logs         |
-| LOG_ROTATION_TIME         | "24"                     | Log rotation time (in hours)      |
-| LOG_REMAIN_ROTATION_COUNT | "2"                      | Number of log rotations to retain |
-| LOG_REMAIN_LOG_LEVEL      | "6"                      | Log level to retain               |
-| LOG_IS_STDOUT             | "false"                  | Output log to standard output     |
-| LOG_IS_JSON               | "false"                  | Log in JSON format                |
-| LOG_WITH_STACK            | "false"                  | Include stack info in logs        |
+| Parameter                 | Example Value                   | Description                       |
+| ------------------------- | ------------------------------- | --------------------------------- |
+| LOG_STORAGE_LOCATION      | "${OPENIM_ROOT}/\_output/logs/" | Location for storing logs         |
+| LOG_ROTATION_TIME         | "24"                            | Log rotation time (in hours)      |
+| LOG_REMAIN_ROTATION_COUNT | "2"                             | Number of log rotations to retain |
+| LOG_REMAIN_LOG_LEVEL      | "6"                             | Log level to retain               |
+| LOG_IS_STDOUT             | "false"                         | Output log to standard output     |
+| LOG_IS_JSON               | "false"                         | Log in JSON format                |
+| LOG_WITH_STACK            | "false"                         | Include stack info in logs        |
 
-###  2.19. <a name='AdditionalConfigurationVariables'></a>Additional Configuration Variables
+### 2.19. <a name='AdditionalConfigurationVariables'></a>Additional Configuration Variables
 
 This section involves setting up additional configuration variables for Websocket, Push Notifications, and Chat.
 
-| Parameter               | Example Value     | Description                      |
-|-------------------------|-------------------|----------------------------------|
-| WEBSOCKET_MAX_CONN_NUM  | "100000"          | Maximum Websocket connections    |
-| WEBSOCKET_MAX_MSG_LEN   | "4096"            | Maximum Websocket message length |
-| WEBSOCKET_TIMEOUT       | "10"              | Websocket timeout                |
-| PUSH_ENABLE             | "getui"           | Push notification enable status  |
-| GETUI_PUSH_URL          | [Generated URL]   | GeTui Push Notification URL      |
-| GETUI_MASTER_SECRET     | [User Defined]    | GeTui Master Secret              |
-| GETUI_APP_KEY           | [User Defined]    | GeTui Application Key            |
-| GETUI_INTENT            | [User Defined]    | GeTui Push Intent                |
-| GETUI_CHANNEL_ID        | [User Defined]    | GeTui Channel ID                 |
-| GETUI_CHANNEL_NAME      | [User Defined]    | GeTui Channel Name               |
-| FCM_SERVICE_ACCOUNT     | "x.json"          | FCM Service Account              |
-| JPUSH_APP_KEY            | [User Defined]    | JPUSH Application Key             |
-| JPUSH_MASTER_SECRET      | [User Defined]    | JPUSH Master Secret               |
-| JPUSH_PUSH_URL           | [User Defined]    | JPUSH Push Notification URL       |
-| JPUSH_PUSH_INTENT        | [User Defined]    | JPUSH Push Intent                 |
-| IM_ADMIN_USERID         | "imAdmin"         | IM Administrator ID              |
-| IM_ADMIN_NAME           | "imAdmin"         | IM Administrator Nickname        |
-| MULTILOGIN_POLICY       | "1"               | Multi-login Policy               |
-| CHAT_PERSISTENCE_MYSQL  | "true"            | Chat Persistence in MySQL        |
-| MSG_CACHE_TIMEOUT       | "86400"           | Message Cache Timeout            |
-| GROUP_MSG_READ_RECEIPT  | "true"            | Group Message Read Receipt Enable |
-| SINGLE_MSG_READ_RECEIPT | "true"            | Single Message Read Receipt Enable |
-| RETAIN_CHAT_RECORDS     | "365"             | Retain Chat Records (in days)    |
-| CHAT_RECORDS_CLEAR_TIME | [Cron Expression] | Chat Records Clear Time          |
-| MSG_DESTRUCT_TIME       | [Cron Expression] | Message Destruct Time            |
-| SECRET                  | "${PASSWORD}"     | Secret Key                       |
-| TOKEN_EXPIRE            | "90"              | Token Expiry Time                |
-| FRIEND_VERIFY           | "false"           | Friend Verification Enable       |
-| IOS_PUSH_SOUND          | "xxx"             | iOS                              |
-| CALLBACK_ENABLE         | "false"            | Enable callback                  | 
-| CALLBACK_TIMEOUT        | "5"               | Maximum timeout for callback call |
-| CALLBACK_FAILED_CONTINUE| "true"            | fails to continue to the next step |
-###  2.20. <a name='PrometheusConfiguration-1'></a>Prometheus Configuration
+| Parameter                | Example Value     | Description                        |
+| ------------------------ | ----------------- | ---------------------------------- |
+| WEBSOCKET_MAX_CONN_NUM   | "100000"          | Maximum Websocket connections      |
+| WEBSOCKET_MAX_MSG_LEN    | "4096"            | Maximum Websocket message length   |
+| WEBSOCKET_TIMEOUT        | "10"              | Websocket timeout                  |
+| PUSH_ENABLE              | "getui"           | Push notification enable status    |
+| GETUI_PUSH_URL           | [Generated URL]   | GeTui Push Notification URL        |
+| GETUI_MASTER_SECRET      | [User Defined]    | GeTui Master Secret                |
+| GETUI_APP_KEY            | [User Defined]    | GeTui Application Key              |
+| GETUI_INTENT             | [User Defined]    | GeTui Push Intent                  |
+| GETUI_CHANNEL_ID         | [User Defined]    | GeTui Channel ID                   |
+| GETUI_CHANNEL_NAME       | [User Defined]    | GeTui Channel Name                 |
+| FCM_SERVICE_ACCOUNT      | "x.json"          | FCM Service Account                |
+| JPUSH_APP_KEY            | [User Defined]    | JPUSH Application Key              |
+| JPUSH_MASTER_SECRET      | [User Defined]    | JPUSH Master Secret                |
+| JPUSH_PUSH_URL           | [User Defined]    | JPUSH Push Notification URL        |
+| JPUSH_PUSH_INTENT        | [User Defined]    | JPUSH Push Intent                  |
+| IM_ADMIN_USERID          | "imAdmin"         | IM Administrator ID                |
+| IM_ADMIN_NAME            | "imAdmin"         | IM Administrator Nickname          |
+| MULTILOGIN_POLICY        | "1"               | Multi-login Policy                 |
+| CHAT_PERSISTENCE_MYSQL   | "true"            | Chat Persistence in MySQL          |
+| MSG_CACHE_TIMEOUT        | "86400"           | Message Cache Timeout              |
+| GROUP_MSG_READ_RECEIPT   | "true"            | Group Message Read Receipt Enable  |
+| SINGLE_MSG_READ_RECEIPT  | "true"            | Single Message Read Receipt Enable |
+| RETAIN_CHAT_RECORDS      | "365"             | Retain Chat Records (in days)      |
+| CHAT_RECORDS_CLEAR_TIME  | [Cron Expression] | Chat Records Clear Time            |
+| MSG_DESTRUCT_TIME        | [Cron Expression] | Message Destruct Time              |
+| SECRET                   | "${PASSWORD}"     | Secret Key                         |
+| TOKEN_EXPIRE             | "90"              | Token Expiry Time                  |
+| FRIEND_VERIFY            | "false"           | Friend Verification Enable         |
+| IOS_PUSH_SOUND           | "xxx"             | iOS                                |
+| CALLBACK_ENABLE          | "false"           | Enable callback                    |
+| CALLBACK_TIMEOUT         | "5"               | Maximum timeout for callback call  |
+| CALLBACK_FAILED_CONTINUE | "true"            | fails to continue to the next step |
+
+### 2.20. <a name='PrometheusConfiguration-1'></a>Prometheus Configuration
 
 This section involves configuring Prometheus, including enabling/disabling it and setting up ports for various services.
 
-####  2.20.1. <a name='GeneralConfiguration'></a>General Configuration
+#### 2.20.1. <a name='GeneralConfiguration'></a>General Configuration
 
 | Parameter           | Example Value | Description                   |
 | ------------------- | ------------- | ----------------------------- |
 | `PROMETHEUS_ENABLE` | "false"       | Whether to enable Prometheus. |
 
-####  2.20.2. <a name='Service-SpecificPrometheusPorts'></a>Service-Specific Prometheus Ports
+#### 2.20.2. <a name='Service-SpecificPrometheusPorts'></a>Service-Specific Prometheus Ports
 
 | Service                  | Parameter                | Default Port Value           | Description                                        |
 | ------------------------ | ------------------------ | ---------------------------- | -------------------------------------------------- |
@@ -521,17 +516,16 @@ This section involves configuring Prometheus, including enabling/disabling it an
 | Third Service            | `THIRD_PROM_PORT`        | '21301'                      | Prometheus port for the Third service.             |
 | Message Transfer Service | `MSG_TRANSFER_PROM_PORT` | '21400, 21401, 21402, 21403' | Prometheus ports for the Message Transfer service. |
 
-
-###  2.21. <a name='QiniuCloudKODOConfiguration'></a>Qiniu Cloud Kodo Configuration
+### 2.21. <a name='QiniuCloudKODOConfiguration'></a>Qiniu Cloud Kodo Configuration
 
 This section involves setting up Qiniu Cloud Kodo, including its endpoint, bucket name, and credentials.
 
-| Parameter             | Example Value                                                | Description                              |
-| --------------------- | ------------------------------------------------------------ | ---------------------------------------- |
+| Parameter              | Example Value                                                        | Description                             |
+| ---------------------- | -------------------------------------------------------------------- | --------------------------------------- |
 | KODO_ENDPOINT          | "[http://s3.cn-east-1.qiniucs.com](http://s3.cn-east-1.qiniucs.com)" | Endpoint URL for Qiniu Cloud Kodo.      |
-| KODO_BUCKET            | "demo-9999999"                                               | Bucket name for Qiniu Cloud Kodo.       |
-| KODO_BUCKET_URL        | "[http://your.domain.com](http://your.domain.com)" | Bucket URL for Qiniu Cloud Kodo.        |
-| KODO_ACCESS_KEY_ID     | [User Defined]                                               | Access key ID for Qiniu Cloud Kodo.     |
-| KODO_ACCESS_KEY_SECRET | [User Defined]                                               | Access key secret for Qiniu Cloud Kodo. |
-| KODO_SESSION_TOKEN     | [User Defined]                                               | Session token for Qiniu Cloud Kodo.     |
-| KODO_PUBLIC_READ       | "false"                                                      | Public read access.                      |
+| KODO_BUCKET            | "demo-9999999"                                                       | Bucket name for Qiniu Cloud Kodo.       |
+| KODO_BUCKET_URL        | "[http://your.domain.com](http://your.domain.com)"                   | Bucket URL for Qiniu Cloud Kodo.        |
+| KODO_ACCESS_KEY_ID     | [User Defined]                                                       | Access key ID for Qiniu Cloud Kodo.     |
+| KODO_ACCESS_KEY_SECRET | [User Defined]                                                       | Access key secret for Qiniu Cloud Kodo. |
+| KODO_SESSION_TOKEN     | [User Defined]                                                       | Session token for Qiniu Cloud Kodo.     |
+| KODO_PUBLIC_READ       | "false"                                                              | Public read access.                     |

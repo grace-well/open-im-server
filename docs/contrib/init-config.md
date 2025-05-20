@@ -7,8 +7,7 @@
     - [Bash Parsing Features](#bash-parsing-features)
   - [Reasons and Advantages of the Design](#reasons-and-advantages-of-the-design)
 
-
-##  Start
+## Start
 
 With the increasing complexity of software engineering, effective configuration management has become more and more important. Yaml and other configuration files provide the necessary parameters and guidance for systems, but they also impose additional management overhead for developers. This article explores how to automate and optimize configuration management, thereby improving efficiency and reducing the chances of errors.
 
@@ -58,7 +57,7 @@ For instance, we can initially set a universal password and reuse this password 
 
 ```
 # Set a consistent password for easy memory
-def "PASSWORD" "openIM123"
+def "PASSWORD" "Mianju20250515"
 
 # Linux system user for openim
 def "LINUX_USERNAME" "openim"

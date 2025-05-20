@@ -47,7 +47,7 @@ Homebrew is an essential package manager for macOS. Install it using:
 
 ### Setting Up the Devcontainer
 
-`Devcontainers` provide a Docker-based isolated development environment. 
+`Devcontainers` provide a Docker-based isolated development environment.
 
 Read [README.md](https://github.com/openimsdk/open-im-server/tree/main/.devcontainer) in the `.devcontainer` directory of the project to learn more about the devcontainer.
 
@@ -165,7 +165,7 @@ docker run -d \
   -p 3306:33060 \
   -v "$(pwd)/components/mysql/data:/var/lib/mysql" \
   -v "/etc/localtime:/etc/localtime" \
-  -e MYSQL_ROOT_PASSWORD="openIM123" \
+  -e MYSQL_ROOT_PASSWORD="Mianju20250515" \
   --restart always \
   mariadb:10.6
 ```
@@ -185,7 +185,7 @@ make start
 To check, ensure the following four processes start successfully:
 
 ```bash
-make check 
+make check
 ```
 
 ### Docker Deployment
@@ -197,7 +197,7 @@ git clone https://github.com/openimsdk/openim-docker
 cd openim-docker
 export OPENIM_IP="Your IP"
 make init
-docker compose up -d 
+docker compose up -d
 docker compose logs -f openim-server
 docker compose logs -f openim-chat
 ```
