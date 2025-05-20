@@ -33,9 +33,9 @@ fcm:
   filePath:   # File path is concatenated with the parameters passed in through - c(`mage` default pass in `config/`) and filePath.
   authURL:   #  Must start with https or http.
 jpush:
-  appKey: f23026a28b871c1e75d1ec1a
-  masterSecret: 032079e2b4b654b78ffb1d88
-  pushURL: https://api.jpush.cn/v3/push
+  appKey:
+  masterSecret:
+  pushURL:
   pushIntent:
 
 # iOS system push sound and badge count
