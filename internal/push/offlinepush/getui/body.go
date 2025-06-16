@@ -156,6 +156,8 @@ func (pushReq *PushReq) setPushChannel(title string, body string) {
 	notify := "notify"
 	pushReq.PushChannel.Ios.NotificationType = &notify
 	pushReq.PushChannel.Ios.Aps.Sound = "default"
+	autoBadge := "+1"
+	pushReq.PushChannel.Ios.AutoBadge = &autoBadge
 	pushReq.PushChannel.Ios.Aps.Alert = Alert{
 		Title: title,
 		Body:  body,
