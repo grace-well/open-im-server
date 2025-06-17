@@ -1,4 +1,4 @@
-url: http://127.0.0.1:9000/openim/imcallback
+url: http://api.miliyue.com/openim/imcallback
 beforeSendSingleMsg:
   enable: false
   timeout: 5
