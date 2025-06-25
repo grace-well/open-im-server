@@ -120,13 +120,25 @@ type Options struct {
 		ChannelID    string `json:"/message/android/notification/channel_id"`
 		Sound        string `json:"/message/android/notification/sound"`
 		Importance   string `json:"/message/android/notification/importance"`
+		Category     string `json:"/message/android/category"`
 	} `json:"HW"`
+	HO struct {
+		Importance string `json:"/android/notification/importance"`
+	} `json:"HO"`
+	OP struct {
+		Category string `json:"/category"`
+		Level    int    `json:"/notify_level"`
+	} `json:"OP"`
+
 	XM struct {
 		ChannelID string `json:"/extra.channel_id"`
 	} `json:"XM"`
 	VV struct {
-		Classification int `json:"/classification"`
+		Category string `json:"/category"`
 	} `json:"VV"`
+	MZ struct {
+		MsgType int `json:"/noticeMsgType"`
+	} `json:"MZ"`
 }
 
 type Payload struct {
@@ -174,14 +186,23 @@ func (pushReq *PushReq) setPushChannel(title string, body string) {
 			ChannelID    string `json:"/message/android/notification/channel_id"`
 			Sound        string `json:"/message/android/notification/sound"`
 			Importance   string `json:"/message/android/notification/importance"`
-		}{ChannelID: "RingRing4", Sound: "/raw/ring001", Importance: "NORMAL"},
+			Category     string `json:"/message/android/category"`
+		}{ChannelID: "RingRing4", Sound: "/raw/ring001", Importance: "NORMAL", Category: "IM"},
+		HO: struct {
+			Importance string `json:"/android/notification/importance"`
+		}{Importance: "NORMAL"},
 		XM: struct {
 			ChannelID string `json:"/extra.channel_id"`
-		}{ChannelID: "high_system"},
+		}{ChannelID: "130951"},
+		OP: struct {
+			Category string `json:"/category"`
+			Level    int    `json:"/notify_level"`
+		}{Category: "IM", Level: 2},
 		VV: struct {
-			Classification int "json:\"/classification\""
-		}{
-			Classification: 1,
-		},
+			Category string `json:"/category"`
+		}{Category: "IM"},
+		MZ: struct {
+			MsgType int `json:"/noticeMsgType"`
+		}{MsgType: 1},
 	}
 }
