@@ -16,4 +16,4 @@ prometheus:
   ports: [12002]
   # This address can be accessed via a browser
   #grafanaURL: http://127.0.0.1:13000/
-  grafanaURL: http://grafana.im.miliyue.com/
+  grafanaURL: http://im.miliyue.com/grafana/

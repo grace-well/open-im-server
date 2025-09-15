@@ -10,6 +10,6 @@ sessionToken:
 internalAddress: localhost:10005
 # External address of the MinIO server, accessible from outside. Supports both HTTP and HTTPS using a domain name
 #externalAddress: http://127.0.0.1:10005
-externalAddress: http://minio.im.miliyue.com
+externalAddress: http://im.miliyue.com/minio
 # Flag to enable or disable public read access to the bucket
 publicRead: false
